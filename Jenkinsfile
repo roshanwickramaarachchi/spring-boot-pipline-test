@@ -22,7 +22,12 @@ pipeline {
                 // your deploy steps here
 
 //                 sh 'java -jar target/*.jar --server.port=8081'
-                sh 'nohup java -jar target/*.jar --server.port=8081 > app.log 2>&1 & disown'
+            }
+        }
+        stage('Deploy Docker') {
+            steps {
+                sh 'docker build -t spring-boot-app .'
+                sh 'docker run -d -p 8081:8081 --name spring-boot-app spring-boot-app'
             }
         }
     }
