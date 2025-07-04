@@ -21,7 +21,8 @@ pipeline {
                 echo "Deploying application..."
                 // your deploy steps here
 
-                sh 'java -jar target/*.jar --server.port=8081'
+//                 sh 'java -jar target/*.jar --server.port=8081'
+                sh 'nohup java -jar target/*.jar --server.port=8081 > app.log 2>&1 &'
             }
         }
     }
