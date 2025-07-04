@@ -59,6 +59,12 @@ pipeline {
             steps {
                 echo "Deploying application..."
                 // your deploy steps here
+
+                  sh 'docker stop springboot-app || true'
+                  sh 'docker rm springboot-app || true'
+                  sh 'docker rmi springboot-app || true'
+                  sh 'docker build -t springboot-app .'
+                  sh 'docker run -d --name springboot-app -p 8081:8080 springboot-app'
             }
         }
     }
